@@ -8,6 +8,7 @@ export const AUTHENTICATED = 'authenticated_user';
 export const UNAUTHENTICATED = 'unauthenticated_user';
 export const AUTHENTICATED_ERROR = 'authenticated_error';
 export const REGISTER = 'register_user';
+export const USER_ALREADY_EXISTS = 'user_already_exists';
 export const FETCH_CATEGORIES = 'fetch_categories';
 export const FETCH_RECIPES = 'fetch_recipes';
 export const CREATE_CATEGORY = 'create_category';
@@ -44,13 +45,21 @@ export const signInAction = ({ email, password }, history) => {
 
 // action creator for signing up user
 export const signUpAction = (values, callback) => {
-    const request = axios.post(`${ROOT_URL}/auth/register`, values)
-        .then(() => callback);
-    
-    return {
-        type: REGISTER,
-        payload: request
-    };
+    return async (dispatch) => {
+        try {
+            const request = await axios.post(`${ROOT_URL}/auth/register`, values);
+            dispatch({
+                type: REGISTER,
+                payload: request
+            });
+            callback();
+        }catch(error) {
+            dispatch({
+                type: USER_ALREADY_EXISTS,
+                payload: 'User already exists'
+            })
+        }
+    }
 }
 
 // logging/signing out user

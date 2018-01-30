@@ -16,7 +16,6 @@ import NavbarComponent from './components/universal/navbar';
 import Homepage from './components/homepage';
 import Signin from './components/auth/signin';
 import Signup from './components/auth/signup';
-import SignOut from './components/auth/signOut';
 import Dashboard from './components/universal/dashboard';
 import requireAuth from './components/auth/require_auth';
 import noRequireAuth from './components/auth/no_require_auth';
@@ -45,7 +44,6 @@ ReactDOM.render(
                     <Route path="/dashboard" component={requireAuth(Dashboard)} />
                     <Route path="/signup" component={noRequireAuth(Signup)} />
                     <Route path="/signin" component={noRequireAuth(Signin)} />
-                    <Route path="/signout" component={requireAuth(SignOut)} />
                 </Switch>
                 {/* footer */}
                 <footer className="container">
