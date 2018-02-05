@@ -1,4 +1,4 @@
-import { AUTHENTICATED, UNAUTHENTICATED, AUTHENTICATED_ERROR } from '../actions';
+import { AUTHENTICATED, UNAUTHENTICATED, AUTHENTICATED_ERROR } from '../constants';
 
 export default (state={}, action) => {
     switch(action.type) {
