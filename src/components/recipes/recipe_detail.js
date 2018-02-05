@@ -9,7 +9,6 @@ import RecipeEditModal from './recipe_edit_modal';
 
 class RecipeDetail extends Component {
     componentDidMount() {
-        console.log(this.props);
         const { cat_id, recipe_id } = this.props.match.params;
         this.props.fetchRecipe(cat_id, recipe_id);
     }
