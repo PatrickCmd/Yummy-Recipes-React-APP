@@ -9,7 +9,6 @@ class CategoryModal extends Component {
     _submit(values){
         this.props.createCategory(values, () => {
             window.location.reload();
-            // document.querySelector('#close').click();
             this.props.history.push("/dashboard");
         });
     }
