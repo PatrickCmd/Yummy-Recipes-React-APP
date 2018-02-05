@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import {Col, Button, Form, FormGroup, FormFeedback, FormText, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 
-import { createRecipe } from '../../actions';
+import { createRecipe } from '../../actions/recipes';
 
 class RecipeModal extends Component {
 
