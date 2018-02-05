@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { fetchCategories } from '../../actions/index';
+import { fetchCategories } from '../../actions/categories';
 
 class CategoriesList extends Component {
     componentDidMount() {
