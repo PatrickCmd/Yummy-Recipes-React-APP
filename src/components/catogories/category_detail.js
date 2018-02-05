@@ -5,7 +5,7 @@ import { Button } from 'reactstrap';
 
 import CategoryRecipes from '../recipes/category_recipes';
 import RecipeModal from '../recipes/recipe_modal';
-import { fetchCategory } from '../../actions';
+import { fetchCategory } from '../../actions/categories';
 
 class CategoryDetail extends Component {
     componentDidMount() {
