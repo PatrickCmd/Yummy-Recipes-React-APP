@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { FETCH_CATEGORY, FETCH_CATEGORY_RECIPES, UNAUTHENTICATED } from '../actions';
+import { FETCH_CATEGORY, FETCH_CATEGORY_RECIPES, UNAUTHENTICATED } from '../constants';
 
 export default (state = {}, action) => {
     switch(action.type) {
