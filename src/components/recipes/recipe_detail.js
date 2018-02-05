@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
-import { fetchRecipe } from '../../actions';
+import { fetchRecipe } from '../../actions/recipes';
 import RecipeEditModal from './recipe_edit_modal';
 
 class RecipeDetail extends Component {
