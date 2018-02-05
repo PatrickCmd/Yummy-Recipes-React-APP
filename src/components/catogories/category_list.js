@@ -22,7 +22,7 @@ class CategoriesList extends Component {
         return _.map(categories, category => {
             return (
                 <li className="list-group-item" key={ category.id }>
-                   <Link to="#">{  category.name }</Link>
+                   <Link to={`/categories/${category.id}`}>{  category.name }</Link>
                 </li>
             );
         });
