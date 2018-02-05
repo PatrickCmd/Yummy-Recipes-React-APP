@@ -10,8 +10,12 @@ export const AUTHENTICATED_ERROR = 'authenticated_error';
 export const REGISTER = 'register_user';
 export const USER_ALREADY_EXISTS = 'user_already_exists';
 export const FETCH_CATEGORIES = 'fetch_categories';
+export const FETCH_CATEGORY = 'fetch_category';
+export const FETCH_CATEGORY_RECIPES = 'fetch_category_recipes';
 export const FETCH_RECIPES = 'fetch_recipes';
+export const FETCH_RECIPE = 'fetch_recipe';
 export const CREATE_CATEGORY = 'create_category';
+export const CREATE_RECIPE = 'create_recipe';
 
 // action creator for signing in user
 export const login = (res) => {
@@ -96,6 +100,16 @@ export const createCategory = (values, callback) => {
     }
 }
 
+export const createRecipe = (values, cat_id, callback) => {
+    const request = instance.post(`${ROOT_URL}/recipe_category/${cat_id}/recipes`, values)
+        .then(() => callback());
+    
+    return {
+        type: CREATE_RECIPE,
+        payload: request
+    }
+}
+
 export const fetching = () => {
     return {
         type: "FETCHING"
@@ -126,12 +140,35 @@ export const fetchCategories = () => {
     }
 }
 
+// action creator for fetching single category
+export const fetchCategory = (id) =>{
+    return async (dispatch) => {
+        try {
+            const request = await instance.get(`${ROOT_URL}/recipe_category/${id}`);
+            console.log(request);
+            
+            dispatch({
+                type: FETCH_CATEGORY,
+                payload: request
+            });
+        }catch(error) {
+            dispatch({
+                type: "UNAUTHENTICATED",
+                payload: "Invalid or expired token please login again"
+            })
+        }
+    }
+
+}
+
+
 export const fetchRec = (res) => {
     return {
         type: FETCH_RECIPES,
         payload: res,
     }
 }
+
 // action creator for fetching recipes from the database
 export const fetchRecipes = () => {
     return async (dispatch) => {
@@ -147,4 +184,45 @@ export const fetchRecipes = () => {
             });
         }
     }
+}
+
+// action creator for fetching recipes in category from the database
+export const fetchCategoryRecipes = (id) => {
+    return async (dispatch) => {
+        try {
+            dispatch(fetching);
+            const request = await instance.get(`${ROOT_URL}/recipe_category/${id}/recipes`);
+
+            dispatch({
+                type: FETCH_CATEGORY_RECIPES,
+                payload: request,
+            });
+        }catch(error) {
+            dispatch({
+                type: "UNAUTHENTICATED",
+                payload: "Invalid authentication credentials"
+            });
+        }
+    }
+}
+
+// action creator for fetching single recipe
+export const fetchRecipe = (cat_id, recipe_id) =>{
+    return async (dispatch) => {
+        try {
+            const request = await instance.get(`${ROOT_URL}/recipe_category/${cat_id}/recipes/${recipe_id}`);
+            console.log(request);
+            
+            dispatch({
+                type: FETCH_RECIPE,
+                payload: request
+            });
+        }catch(error) {
+            dispatch({
+                type: "UNAUTHENTICATED",
+                payload: "Invalid or expired token please login again"
+            })
+        }
+    }
+
 }
