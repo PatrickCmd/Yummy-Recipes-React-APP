@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { fetchRecipes } from '../../actions/index';
+import { fetchRecipes } from '../../actions/recipes';
 
 class RecipesList extends Component {
     componentDidMount() {
