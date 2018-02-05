@@ -1,15 +1,17 @@
 import _ from 'lodash';
 
-import { FETCH_CATEGORIES, UNAUTHENTICATED } from '../actions';
+import { FETCH_CATEGORY, FETCH_CATEGORY_RECIPES, UNAUTHENTICATED } from '../actions';
 
 export default (state = {}, action) => {
     switch(action.type) {
         case "FETCHING":
             return null
-        case FETCH_CATEGORIES:
-            return _.mapKeys(action.payload.data.recipe_categories, "id") // using lodash mapKeys to covert an array to an object
+        case FETCH_CATEGORY:
+            return { ...state, category_item: action.payload.data.recipe_category};
+        case FETCH_CATEGORY_RECIPES:
+             return  { ...state, category_recipes: _.mapKeys(action.payload.data.recipes_in_category, "id")}
         case UNAUTHENTICATED:
-            return {  ...state,  categories: {} };
+            return {  ...state,  category: {} };
         default:
             return state
     }
