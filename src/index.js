@@ -19,7 +19,7 @@ import Signup from './components/auth/signup';
 import Dashboard from './components/universal/dashboard';
 import requireAuth from './components/auth/require_auth';
 import noRequireAuth from './components/auth/no_require_auth';
-import { AUTHENTICATED } from './actions';
+import { AUTHENTICATED } from './constants';
 import CategoryDetail from './components/catogories/category_detail';
 import RecipeDetail from './components/recipes/recipe_detail';
 
