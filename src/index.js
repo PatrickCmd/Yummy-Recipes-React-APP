@@ -4,11 +4,11 @@ import promise from 'redux-promise';
 import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
 import logger from 'redux-logger'
 
-import './index.css';
+import './style/style.css';
 import registerServiceWorker from './registerServiceWorker';
 import reducers from './reducers';
 
@@ -20,6 +20,8 @@ import Dashboard from './components/universal/dashboard';
 import requireAuth from './components/auth/require_auth';
 import noRequireAuth from './components/auth/no_require_auth';
 import { AUTHENTICATED } from './actions';
+import CategoryDetail from './components/catogories/category_detail';
+import RecipeDetail from './components/recipes/recipe_detail';
 
 const createStoreWithMiddleware = applyMiddleware(promise, reduxThunk,logger)(createStore);
 const store = createStoreWithMiddleware(
@@ -41,9 +43,12 @@ ReactDOM.render(
                 <main role="main">
                 <Switch>
                     <Route exact path="/" component={Homepage} />
+                    <Route exact path="/categories/:id" component={requireAuth(CategoryDetail)} />
                     <Route path="/dashboard" component={requireAuth(Dashboard)} />
                     <Route path="/signup" component={noRequireAuth(Signup)} />
                     <Route path="/signin" component={noRequireAuth(Signin)} />
+                    <Route exact path="/categories/:cat_id/recipes/:recipe_id" component={requireAuth(RecipeDetail)} />
+                    <Redirect to="/" />
                 </Switch>
                 {/* footer */}
                 <footer className="container">
