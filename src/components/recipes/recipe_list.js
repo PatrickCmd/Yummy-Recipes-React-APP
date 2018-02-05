@@ -12,7 +12,7 @@ class RecipesList extends Component {
 
     renderRecipes() {
         const { recipes } = this.props;
-        const cardStyle = {width: '18rem'};
+        const cardStyle = {width: '180rem'};
         if (!recipes) {
             return (
                 <div>Loading...</div>
@@ -25,11 +25,9 @@ class RecipesList extends Component {
                 <div className="col-md-6" key={ recipe.id }>
                     <div className="card">
                         <img className="card-img-top" src="http://placehold.it/286x180" alt="Card image cap" />
-                        <div className="card-body" style={ cardStyle }>
+                        <div className="card-body">
                             <h5 className="card-title">{ recipe.name }</h5>
-                            <p className="card-text">
-                                { recipe.description }
-                            </p>
+                            <p className="card-text">{ recipe.description }</p>
                             <Link to="#" className="btn btn-primary">View More</Link>
                         </div>
                     </div>
