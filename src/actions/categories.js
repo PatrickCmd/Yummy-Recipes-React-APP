@@ -1,4 +1,3 @@
-import axios from 'axios';
 import instance from './AxiosInstance';
 import { ROOT_URL, CREATE_CATEGORY, FETCH_CATEGORIES, FETCH_CATEGORY } from '../constants';
 
@@ -52,7 +51,6 @@ export const fetchCategory = (id) =>{
     return async (dispatch) => {
         try {
             const request = await instance.get(`${ROOT_URL}/recipe_category/${id}`);
-            console.log(request);
             
             dispatch({
                 type: FETCH_CATEGORY,
