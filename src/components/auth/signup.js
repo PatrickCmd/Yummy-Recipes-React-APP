@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Button, Form, FormGroup, FormFeedback, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Notifications from 'react-notify-toast';
 
 import CarouselComponent from '../universal/carousel';
 import { signUpAction } from '../../actions';
@@ -79,7 +80,7 @@ class Signup extends Component {
                                     id="password"
                                     component={ this.renderField }
                                 />
-                                <Button type="submit" color="primary">Sign in</Button>
+                                <Button type="submit" color="primary">Sign up</Button>
                             </Form>
                             <Link to="/signin">ALREADY A MEMBER! SIGN IN <i class="fa fa-arrow-right"></i></Link>
                         </div>
@@ -87,6 +88,8 @@ class Signup extends Component {
                     <hr className="featurette-divider" />
                 </div>
                 {/* // <!-- container --> */}
+
+                <Notifications />
             </div>
         );
     }
