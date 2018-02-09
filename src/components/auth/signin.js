@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Button, Form, FormGroup, FormFeedback, Label, Input} from 'reactstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Notifications, { notify } from 'react-notify-toast';
 
 import CarouselComponent from '../universal/carousel';
 import { signInAction } from '../../actions/index';
@@ -34,8 +35,9 @@ class Signin extends Component {
     }
 
     // method to return an error message if signin fails
-    errorMessage() {
+    errorMessage = ()=> {
         if (this.props.errorMessage) {
+            console.log(this.props.errorMessage);
             return (
                 <div className="info-red">
                     { this.props.errorMessage }
@@ -52,9 +54,10 @@ class Signin extends Component {
                 <div className="container">
                     <div className="row justify-content-md-center">
                         <div className="col-md-6">
+                            { this.errorMessage }
                             <h3>SIGN IN</h3>
                             <hr />
-                            <Form onSubmit={ handleSubmit(this.onSubmitForm.bind(this)) }>
+                            <Form onSubmit={ handleSubmit(this.onSubmitForm) }>
                                 <Field 
                                     label="Email"
                                     name="email"
@@ -78,6 +81,8 @@ class Signin extends Component {
                     </div>
                     <hr className="featurette-divider" />
                 </div>
+                
+                <Notifications />
             </div>
         );
     }
