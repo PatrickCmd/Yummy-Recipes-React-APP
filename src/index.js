@@ -10,7 +10,7 @@ import logger from 'redux-logger'
 
 import './style/style.css';
 import registerServiceWorker from './registerServiceWorker';
-import reducers from './reducers';
+import store from './reducers';
 
 import NavbarComponent from './components/universal/navbar';
 import Homepage from './components/homepage';
@@ -22,12 +22,6 @@ import noRequireAuth from './components/auth/no_require_auth';
 import { AUTHENTICATED } from './constants';
 import CategoryDetail from './components/catogories/category_detail';
 import RecipeDetail from './components/recipes/recipe_detail';
-
-const createStoreWithMiddleware = applyMiddleware(promise, reduxThunk,logger)(createStore);
-const store = createStoreWithMiddleware(
-    reducers, 
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
 
 const user = localStorage.getItem('current_user');
 
