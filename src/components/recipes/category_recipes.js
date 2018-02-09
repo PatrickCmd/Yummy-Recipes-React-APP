@@ -2,17 +2,19 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
-import { fetchRecipes } from '../../actions/recipes';
+import { fetchCategoryRecipes } from '../../actions/recipes';
 
-class RecipesList extends Component {
+class CategoryRecipes extends Component {
     componentDidMount() {
-        this.props.fetchRecipes();
+        const { id } = this.props.match.params;
+        this.props.fetchCategoryRecipes(id);
     }
 
     renderRecipes() {
         const { recipes } = this.props;
-        const cardStyle = {width: '180rem'};
+        const cardStyle = {width: '18rem'};
         if (!recipes) {
             return (
                 <div>Loading...</div>
@@ -24,11 +26,13 @@ class RecipesList extends Component {
             return (
                 <div className="col-md-6" key={ recipe.id }>
                     <div className="card">
-                        <img className="card-img-top" src="http://placehold.it/286x180" alt="Card image cap" />
+                        <img className="card-img-top" src="http://placehold.it/500x180" alt="Card image cap" />
                         <div className="card-body">
                             <h5 className="card-title">{ recipe.name }</h5>
-                            <p className="card-text">{ recipe.description }</p>
-                            <Link to="#" className="btn btn-primary">View More</Link>
+                            <p className="card-text">
+                                { recipe.description }
+                            </p>
+                            <Link to={`/categories/${recipe.cat_id}/recipes/${recipe.id}`} className="btn btn-primary">View More</Link>
                         </div>
                     </div>
                 </div>
@@ -48,7 +52,7 @@ class RecipesList extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { recipes: state.recipes }
+    return { recipes: state.category.category_recipes }
 }
 
-export default connect(mapStateToProps, { fetchRecipes })(RecipesList);
+export default withRouter(connect(mapStateToProps, { fetchCategoryRecipes })(CategoryRecipes));

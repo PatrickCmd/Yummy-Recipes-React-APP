@@ -39,15 +39,16 @@ class NavbarComponent extends Component {
                 </NavLink>
             </NavItem>
             <NavItem>
+                <NavLink href="#">
+                    <i className="fa fa-user fa-fw" aria-hidden="true"></i> { email }
+                </NavLink>
+            </NavItem>
+            <NavItem>
                 <NavLink href="#" onClick={ this.handleClick.bind(this) }>
                     <i className="fa fa-sign-out fa-fw" aria-hidden="true"></i> SIGNOUT
                 </NavLink>
             </NavItem>
-            <NavItem>
-                <NavLink href="#">
-                    <i className="fa fa-user fa-fw" aria-hidden="true"></i> { email }
-                </NavLink>
-            </NavItem></Nav>);
+            </Nav>);
         }else {
             navigation = (<Nav className="ml-auto" navbar>
             <NavItem>

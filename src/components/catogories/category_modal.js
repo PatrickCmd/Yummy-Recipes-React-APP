@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { createCategory } from '../../actions';
+import { createCategory } from '../../actions/categories';
 
 class CategoryModal extends Component {
 
@@ -9,7 +9,6 @@ class CategoryModal extends Component {
     _submit(values){
         this.props.createCategory(values, () => {
             window.location.reload();
-            // document.querySelector('#close').click();
             this.props.history.push("/dashboard");
         });
     }

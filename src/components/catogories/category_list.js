@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { fetchCategories } from '../../actions/index';
+import { fetchCategories } from '../../actions/categories';
 
 class CategoriesList extends Component {
     componentDidMount() {
@@ -22,7 +22,7 @@ class CategoriesList extends Component {
         return _.map(categories, category => {
             return (
                 <li className="list-group-item" key={ category.id }>
-                   <Link to="#">{  category.name }</Link>
+                   <Link to={`/categories/${category.id}`}>{  category.name }</Link>
                 </li>
             );
         });
