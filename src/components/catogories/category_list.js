@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Notifications from 'react-notify-toast';
 
 import { fetchCategories } from '../../actions/categories';
 
@@ -34,6 +35,7 @@ class CategoriesList extends Component {
                 <ul className="list-group">
                     { this.renderCategories() }
                 </ul>
+                <Notifications />
             </div>
         );
     }

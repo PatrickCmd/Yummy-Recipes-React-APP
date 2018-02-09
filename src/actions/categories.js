@@ -1,5 +1,5 @@
-import axios from 'axios';
 import instance from './AxiosInstance';
+import { notify, error } from 'react-notify-toast';
 import { ROOT_URL, CREATE_CATEGORY, FETCH_CATEGORIES, FETCH_CATEGORY } from '../constants';
 
 
@@ -15,6 +15,7 @@ export const createCategory = (values, callback) => {
         type: CREATE_CATEGORY,
         payload: request
     }
+    notify.show(request.response.data.message, 'success', 5000);
 }
 
 export const fetching = () => {
@@ -52,7 +53,6 @@ export const fetchCategory = (id) =>{
     return async (dispatch) => {
         try {
             const request = await instance.get(`${ROOT_URL}/recipe_category/${id}`);
-            console.log(request);
             
             dispatch({
                 type: FETCH_CATEGORY,

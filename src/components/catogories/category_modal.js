@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Notifications from 'react-notify-toast';
 
 import { createCategory } from '../../actions/categories';
 
@@ -66,6 +67,7 @@ class CategoryModal extends Component {
                     </div>
                 </div>
                 </div>
+                <Notifications />
             </div>
         );
     }

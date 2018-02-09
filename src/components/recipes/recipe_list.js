@@ -28,7 +28,7 @@ class RecipesList extends Component {
                         <div className="card-body">
                             <h5 className="card-title">{ recipe.name }</h5>
                             <p className="card-text">{ recipe.description }</p>
-                            <Link to="#" className="btn btn-primary">View More</Link>
+                            <Link to={`/categories/${recipe.cat_id}/recipes/${recipe.id}`} className="btn btn-primary">View More</Link>
                         </div>
                     </div>
                 </div>

@@ -33,7 +33,6 @@ class RecipeModal extends Component {
 
     // method callback on form submission
     onSubmitForm = (values) => {
-        console.log(values);
         const { category } = this.props;
         this.props.createRecipe(values, category.id, () => {
             window.location.reload();

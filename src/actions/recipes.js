@@ -1,6 +1,7 @@
-import axios from 'axios';
 import instance from './AxiosInstance';
-import { ROOT_URL, CREATE_RECIPE, FETCH_RECIPES, FETCH_RECIPE, FETCH_CATEGORY_RECIPES } from '../constants';
+import { 
+    ROOT_URL, CREATE_RECIPE, FETCH_RECIPES, FETCH_RECIPE, FETCH_CATEGORY_RECIPES, DELETE_RECIPE, EDIT_RECIPE 
+} from '../constants';
 
 export const createRecipe = (values, cat_id, callback) => {
     const request = instance.post(`${ROOT_URL}/recipe_category/${cat_id}/recipes`, values)
@@ -67,7 +68,6 @@ export const fetchRecipe = (cat_id, recipe_id) =>{
     return async (dispatch) => {
         try {
             const request = await instance.get(`${ROOT_URL}/recipe_category/${cat_id}/recipes/${recipe_id}`);
-            console.log(request);
             
             dispatch({
                 type: FETCH_RECIPE,
@@ -81,4 +81,42 @@ export const fetchRecipe = (cat_id, recipe_id) =>{
         }
     }
 
+}
+
+// action creator for delete recipe
+export const deleteRecipe = (cat_id, recipe_id, callback) => {
+    return async (dispatch) => {
+        try {
+            const request = await instance.delete(`${ROOT_URL}/recipe_category/${cat_id}/recipes/${recipe_id}`)
+                .then(() => callback());
+            dispatch({
+                type: DELETE_RECIPE,
+                payload: request
+            });
+        }catch(error) {
+            dispatch({
+                type: "UNAUTHENTICATED",
+                payload: "Invalid or expired token please login again"
+            })
+        }
+    }
+}
+
+// action creator for delete recipe
+export const editRecipe = (values, cat_id, recipe_id, callback) => {
+    return async (dispatch) => {
+        try {
+            const request = await instance.put(`${ROOT_URL}/recipe_category/${cat_id}/recipes/${recipe_id}`, values)
+                .then(() => callback());
+            dispatch({
+                type: EDIT_RECIPE,
+                payload: request
+            });
+        }catch(error) {
+            dispatch({
+                type: "UNAUTHENTICATED",
+                payload: "Invalid or expired token please login again"
+            })
+        }
+    }
 }

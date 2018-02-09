@@ -1,8 +1,9 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import { notify, error } from 'react-notify-toast';
 
 import instance from './AxiosInstance';
-import { ROOT_URL, REGISTER, USER_ALREADY_EXISTS, AUTHENTICATED, UNAUTHENTICATED, AUTHENTICATED_ERROR } from '../constants';
+import { ROOT_URL, REGISTER, AUTHENTICATED, UNAUTHENTICATED, AUTHENTICATED_ERROR } from '../constants';
 
 // action creator for signing in user
 export const login = (res) => {
@@ -25,11 +26,14 @@ export const signInAction = ({ email, password }, history) => {
              });
             localStorage.setItem('current_user', request.data.auth_token);
             history.push('/dashboard');
+            notify.show('Successfully logged in!', 'success', 5000);
         }catch(error){
+            console.log(error.response);
             dispatch({
                 type: AUTHENTICATED_ERROR,
                 payload: 'Invalid email or password'
             });
+            notify.show(error.response.data.message, 'error', 5000);
         }
     }
 }
@@ -39,16 +43,20 @@ export const signUpAction = (values, callback) => {
     return async (dispatch) => {
         try {
             const request = await axios.post(`${ROOT_URL}/auth/register`, values);
+
             dispatch({
                 type: REGISTER,
                 payload: request
             });
             callback();
+            notify.show('Successfully registered, please login!', 'success', 5000);
         }catch(error) {
-            dispatch({
-                type: USER_ALREADY_EXISTS,
-                payload: 'User already exists'
-            })
+            if(error.response.data.message){
+                notify.show(error.response.data.message, 'error', 5000);
+            }else{
+                notify.show(error.response.data.Error, 'error', 5000);
+            }
+            
         }
     }
 }

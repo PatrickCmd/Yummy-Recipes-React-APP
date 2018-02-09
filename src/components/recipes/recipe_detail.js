@@ -6,6 +6,7 @@ import { Button } from 'reactstrap';
 
 import { fetchRecipe } from '../../actions/recipes';
 import RecipeEditModal from './recipe_edit_modal';
+import DeleteRecipeModal from './delete_recipe_modal';
 
 class RecipeDetail extends Component {
     componentDidMount() {
@@ -45,7 +46,7 @@ class RecipeDetail extends Component {
                             </div>
                         </div><br />
 
-                        <button className="btn btn-danger pull-right" title="Delete Recipe">
+                        <button className="btn btn-danger pull-right" title="Delete Recipe" data-toggle="modal" data-target="#deleteRecipe">
                             <i className="fa fa-trash-o fa-fw"></i> 
                         </button>                        
                         <button className="btn btn-info" data-toggle="modal" data-target="#recipeModal">
@@ -73,7 +74,8 @@ class RecipeDetail extends Component {
                     </div>
                 </div>
                 <div>
-                    <RecipeEditModal />
+                    <RecipeEditModal { ...this.props }/>
+                    <DeleteRecipeModal { ...this.props } />
                 </div>
 
                 <hr className="featurette-divider" />

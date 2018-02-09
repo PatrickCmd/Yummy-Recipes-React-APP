@@ -1,5 +1,10 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+import promise from 'redux-promise';
+import reduxThunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
 
 import authReducer from './auth_reducer';
 import categoriesReducer from './categories_reducer';
@@ -17,4 +22,11 @@ const rootReducer = combineReducers({
     recipe: recipeReducer
 });
 
-export default rootReducer;
+const createStoreWithMiddleware = applyMiddleware(promise, reduxThunk,logger)(createStore);
+const store = createStoreWithMiddleware(
+    rootReducer, 
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+
+export default store;
