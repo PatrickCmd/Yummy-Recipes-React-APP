@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Notifications from 'react-notify-toast';
 
 import CategoriesList from '../../components/catogories/category_list';
 import RecipesList from '../../components/recipes/recipe_list';
@@ -36,6 +37,7 @@ class Dashboard extends Component {
 
                     <hr className="featurette-divider" />
                 </div>
+                <Notifications />
             </div>
         );
     }
