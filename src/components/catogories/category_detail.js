@@ -6,6 +6,7 @@ import { Button } from 'reactstrap';
 import CategoryRecipes from '../recipes/category_recipes';
 import RecipeModal from '../recipes/recipe_modal';
 import { fetchCategory } from '../../actions/categories';
+import recipeListImg from '../../img/recipe_detail.png'
 
 class CategoryDetail extends Component {
     componentDidMount() {
@@ -16,6 +17,7 @@ class CategoryDetail extends Component {
     render() {
         const { category } = this.props;
         const cardStyle = {width: '18rem'};
+        const imgSrc = recipeListImg;
         if (!category){
             return (
                 <div>Loading...</div>
@@ -26,7 +28,7 @@ class CategoryDetail extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="card">
-                            <img className="card-img-top" src="http://placehold.it/1000x300" alt="Card image cap" />
+                            <img className="card-img-top" src={ imgSrc } alt="Card image cap" />
                             <div className="card-body">
                                 <h5 className="card-title">{ category.name }</h5>
                                 <p className="card-text">
