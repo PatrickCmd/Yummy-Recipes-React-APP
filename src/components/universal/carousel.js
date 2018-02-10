@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from 'reactstrap';
+import img1 from '../../img/recipe-food-lab.jpg';
+import img2 from '../../img/recipe-kenji-14.jpg';
+import img3 from '../../img/recipes-roundup-22.jpg';
 
 const items = [
     {
-        src: 'http://placehold.it/1500x300',
+        src: img1,
         altText: 'Slide 1',
         caption: 'Slide 1'
     },
     {
-        src: 'http://placehold.it/1500x300',
+        src: img2,
         altText: 'Slide 2',
         caption: 'Slide 2'
     },
     {
-        src: 'http://placehold.it/1500x300',
+        src: img3,
         altText: 'Slide 3',
         caption: 'Slide 3'
     }
@@ -65,7 +68,9 @@ class CarouselComponent extends Component {
                     onExited = { this.onExited }
                     key = { item.src }
                 >
-                    <img src={ item.src } alt={ item.altText } />
+                    <div className="carouselimg">
+                        <img src={ item.src } alt={ item.altText } />
+                    </div>
                     <CarouselCaption captionText={ item.caption } captionHeader={ item.caption } />
                 </CarouselItem>
             );

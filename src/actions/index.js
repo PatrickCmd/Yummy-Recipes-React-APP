@@ -1,6 +1,6 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import { notify, error } from 'react-notify-toast';
+import { notify } from 'react-notify-toast';
 
 import instance from './AxiosInstance';
 import { ROOT_URL, REGISTER, AUTHENTICATED, UNAUTHENTICATED, AUTHENTICATED_ERROR } from '../constants';

@@ -6,6 +6,10 @@ body {
   min-height: 1200px;
 }
 
+.carouselimg {
+  height: 300px !important;
+}
+
 
 /* Featurettes
 ------------------------- */

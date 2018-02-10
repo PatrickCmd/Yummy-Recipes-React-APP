@@ -7,6 +7,7 @@ import { Button } from 'reactstrap';
 import { fetchRecipe } from '../../actions/recipes';
 import RecipeEditModal from './recipe_edit_modal';
 import DeleteRecipeModal from './delete_recipe_modal';
+import recipeListImg from '../../img/recipe_detail.png'
 
 class RecipeDetail extends Component {
     componentDidMount() {
@@ -27,6 +28,7 @@ class RecipeDetail extends Component {
     render() {
         const { recipe } = this.props;
         const cardStyle = {width: '18rem'};
+        const imgSrc = recipeListImg;
         if (!recipe){
             return (
                 <div>Loading...</div>
@@ -37,7 +39,7 @@ class RecipeDetail extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="card">
-                            <img className="card-img-top" src="http://placehold.it/1000x300" alt="Card image cap" />
+                            <img className="card-img-top" src={ imgSrc } alt="Card image cap" />
                             <div className="card-body">
                                 <h5 className="card-title">{ recipe.name }</h5>
                                 <p className="card-text">
