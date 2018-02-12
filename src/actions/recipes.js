@@ -27,13 +27,18 @@ export const fetchRec = (res) => {
 }
 
 // action creator for fetching recipes from the database
-export const fetchRecipes = () => {
+export const fetchRecipes = (value) => {
     return async (dispatch) => {
         try {
             dispatch(fetching);
-            const request = await instance.get(`${ROOT_URL}/recipes`);
+            if(value){
+                const request = await instance.get(`${ROOT_URL}/recipes?q=${value}`);
+                dispatch(fetchRec(request));
+            }else{
+                const request = await instance.get(`${ROOT_URL}/recipes`);
+                dispatch(fetchRec(request));
+            }
 
-            dispatch(fetchRec(request));
         }catch(error) {
             dispatch({
                 type: "UNAUTHENTICATED",
