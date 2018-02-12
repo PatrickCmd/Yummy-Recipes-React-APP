@@ -30,19 +30,14 @@ class CategoryDetail extends Component {
                         <div className="card">
                             <img className="card-img-top" src={ imgSrc } alt="Card image cap" />
                             <div className="card-body">
-                                <h5 className="card-title">{ category.name }</h5>
+                                <h5 className="card-title">
+                                    <Link to={`/categories/${category.id}`}>{  category.name }</Link>
+                                </h5>
                                 <p className="card-text">
                                     { category.description }
                                 </p>
                             </div>
                         </div><br />
-
-                        <div className="input-group mb-3 col-md-6 pull-left">
-                            <input type="text" className="form-control" placeholder="Search Recipe" aria-label="Recipe" aria-describedby="basic-addon2" />
-                            <div className="input-group-append">
-                                <span className="input-group-text" id="basic-addon2"><i className="fa fa-search"></i> Search</span>
-                            </div>
-                        </div>
                         <button className="btn btn-primary" data-toggle="modal" data-target="#recipeModal"><i className="fa fa-plus fa-fw"></i> Add Recipe</button><br />
                         <hr />
                     </div>
