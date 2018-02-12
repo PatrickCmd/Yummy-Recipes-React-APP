@@ -22,6 +22,14 @@ class CategoryRecipes extends Component {
             );
         }
 
+        if(_.size(recipes) == 0) {
+            return (
+                <div className="alert alert-info">
+                    Category has no recipes in it yet. Click <strong>Add Recipe</strong> to add recipes
+                </div>
+            );
+        }
+
         //using lodash map to traverse through the category object
         return _.map(recipes, recipe => {
             const imgSrc = recipeListImg;
