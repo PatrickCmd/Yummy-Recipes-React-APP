@@ -5,13 +5,26 @@ import {
 } from '../constants';
 
 export const createRecipe = (values, cat_id, callback) => {
-    const request = instance.post(`${ROOT_URL}/recipe_category/${cat_id}/recipes`, values)
-        .then(() => callback());
-    
-    return {
-        type: CREATE_RECIPE,
-        payload: request
+    return async (dispatch) => {
+        const request = await instance.post(`${ROOT_URL}/recipe_category/${cat_id}/recipes`, values)
+        .then((response) => {
+            dispatch({
+                type: CREATE_RECIPE,
+                payload: request
+            });
+            callback();
+            console.log("Sucess: ", response.data.message);
+            notify.show(response.data.message, 'success', 5000);
+        })
+        .catch((error) => {
+            dispatch({
+                type: "UNAUTHENTICATED",
+                payload: "Invalid authentication credentials"
+            });
+            notify.show(error.data.message, 'error', 5000);
+        });
     }
+    
 }
 
 export const fetching = () => {
@@ -115,39 +128,43 @@ export const fetchRecipe = (cat_id, recipe_id) =>{
 // action creator for delete recipe
 export const deleteRecipe = (cat_id, recipe_id, callback) => {
     return async (dispatch) => {
-        try {
-            const request = await instance.delete(`${ROOT_URL}/recipe_category/${cat_id}/recipes/${recipe_id}`)
-                .then(() => callback());
+        const request = await instance.delete(`${ROOT_URL}/recipe_category/${cat_id}/recipes/${recipe_id}`)
+        .then((response) => {
             dispatch({
                 type: DELETE_RECIPE,
                 payload: request
             });
-        }catch(error) {
+            callback();
+            notify.show(response.data.message, 'success', 5000);
+        })
+        .catch((error) => {
             dispatch({
                 type: "UNAUTHENTICATED",
                 payload: "Invalid or expired token please login again"
             })
-            notify.show(error.response.data.message, 'error', 5000);
-        }
+            notify.show(error.data.message, 'error', 5000);
+        });
     }
 }
 
 // action creator for delete recipe
 export const editRecipe = (values, cat_id, recipe_id, callback) => {
     return async (dispatch) => {
-        try {
-            const request = await instance.put(`${ROOT_URL}/recipe_category/${cat_id}/recipes/${recipe_id}`, values)
-                .then(() => callback());
+        const request = await instance.put(`${ROOT_URL}/recipe_category/${cat_id}/recipes/${recipe_id}`, values)
+        .then((response) => {
             dispatch({
                 type: EDIT_RECIPE,
                 payload: request
             });
-        }catch(error) {
+            notify.show(response.data.message, 'success', 5000);
+            callback()
+        })
+        .catch((error) => {
             dispatch({
                 type: "UNAUTHENTICATED",
                 payload: "Invalid or expired token please login again"
             })
-            notify.show(error.response.data.message, 'error', 5000);
-        }
+            notify.show(error.data.message, 'error', 5000);
+        });
     }
 }
