@@ -1,16 +1,30 @@
 import instance from './AxiosInstance';
+import { notify } from 'react-notify-toast';
 import { 
     ROOT_URL, CREATE_RECIPE, FETCH_RECIPES, FETCH_RECIPE, FETCH_CATEGORY_RECIPES, DELETE_RECIPE, EDIT_RECIPE 
 } from '../constants';
 
 export const createRecipe = (values, cat_id, callback) => {
-    const request = instance.post(`${ROOT_URL}/recipe_category/${cat_id}/recipes`, values)
-        .then(() => callback());
-    
-    return {
-        type: CREATE_RECIPE,
-        payload: request
+    return async (dispatch) => {
+        const request = await instance.post(`${ROOT_URL}/recipe_category/${cat_id}/recipes`, values)
+        .then((response) => {
+            dispatch({
+                type: CREATE_RECIPE,
+                payload: request
+            });
+            callback();
+            console.log("Sucess: ", response.data.message);
+            notify.show(response.data.message, 'success', 5000);
+        })
+        .catch((error) => {
+            dispatch({
+                type: "UNAUTHENTICATED",
+                payload: "Invalid authentication credentials"
+            });
+            notify.show(error.data.message, 'error', 5000);
+        });
     }
+    
 }
 
 export const fetching = () => {
@@ -27,15 +41,23 @@ export const fetchRec = (res) => {
 }
 
 // action creator for fetching recipes from the database
-export const fetchRecipes = (value) => {
+export const fetchRecipes = (value, page) => {
     return async (dispatch) => {
         try {
             dispatch(fetching);
             if(value){
-                const request = await instance.get(`${ROOT_URL}/recipes?q=${value}`);
+                const limit = 4;
+                let request = await instance.get(`${ROOT_URL}/recipes?q=${value}&limit=${limit}`);
+                if(page){
+                    request = await instance.get(`${ROOT_URL}/recipes?q=${value}&limit=${limit}&page=${page}`);
+                }
                 dispatch(fetchRec(request));
             }else{
-                const request = await instance.get(`${ROOT_URL}/recipes`);
+                const limit = 4;
+                let request = await instance.get(`${ROOT_URL}/recipes?limit=${limit}`);
+                if(page){
+                    request = await instance.get(`${ROOT_URL}/recipes?limit=${limit}&page=${page}`);
+                }
                 dispatch(fetchRec(request));
             }
 
@@ -44,26 +66,39 @@ export const fetchRecipes = (value) => {
                 type: "UNAUTHENTICATED",
                 payload: "Invalid authentication credentials"
             });
+            localStorage.removeItem('current_user');
+            notify.show(error.response.data.message, 'error', 5000);
         }
     }
 }
 
 // action creator for fetching recipes in category from the database
-export const fetchCategoryRecipes = (id) => {
+export const fetchCategoryRecipes = (id, page) => {
     return async (dispatch) => {
         try {
             dispatch(fetching);
-            const request = await instance.get(`${ROOT_URL}/recipe_category/${id}/recipes`);
-
-            dispatch({
-                type: FETCH_CATEGORY_RECIPES,
-                payload: request,
-            });
+            if(page){
+                const limit = 4;
+                const request = await instance.get(`${ROOT_URL}/recipe_category/${id}/recipes?limit=${limit}&page=${page}`);
+                dispatch({
+                    type: FETCH_CATEGORY_RECIPES,
+                    payload: request,
+                });
+            }else{
+                const limit = 4;
+                const request = await instance.get(`${ROOT_URL}/recipe_category/${id}/recipes?limit=${limit}`);
+                dispatch({
+                    type: FETCH_CATEGORY_RECIPES,
+                    payload: request,
+                });
+            }
         }catch(error) {
             dispatch({
                 type: "UNAUTHENTICATED",
                 payload: "Invalid authentication credentials"
             });
+            localStorage.removeItem('current_user');
+            notify.show(error.response.data.message, 'error', 5000);
         }
     }
 }
@@ -83,6 +118,8 @@ export const fetchRecipe = (cat_id, recipe_id) =>{
                 type: "UNAUTHENTICATED",
                 payload: "Invalid or expired token please login again"
             })
+            localStorage.removeItem('current_user');
+            notify.show(error.response.data.message, 'error', 5000);
         }
     }
 
@@ -91,37 +128,43 @@ export const fetchRecipe = (cat_id, recipe_id) =>{
 // action creator for delete recipe
 export const deleteRecipe = (cat_id, recipe_id, callback) => {
     return async (dispatch) => {
-        try {
-            const request = await instance.delete(`${ROOT_URL}/recipe_category/${cat_id}/recipes/${recipe_id}`)
-                .then(() => callback());
+        const request = await instance.delete(`${ROOT_URL}/recipe_category/${cat_id}/recipes/${recipe_id}`)
+        .then((response) => {
             dispatch({
                 type: DELETE_RECIPE,
                 payload: request
             });
-        }catch(error) {
+            callback();
+            notify.show(response.data.message, 'success', 5000);
+        })
+        .catch((error) => {
             dispatch({
                 type: "UNAUTHENTICATED",
                 payload: "Invalid or expired token please login again"
             })
-        }
+            notify.show(error.data.message, 'error', 5000);
+        });
     }
 }
 
 // action creator for delete recipe
 export const editRecipe = (values, cat_id, recipe_id, callback) => {
     return async (dispatch) => {
-        try {
-            const request = await instance.put(`${ROOT_URL}/recipe_category/${cat_id}/recipes/${recipe_id}`, values)
-                .then(() => callback());
+        const request = await instance.put(`${ROOT_URL}/recipe_category/${cat_id}/recipes/${recipe_id}`, values)
+        .then((response) => {
             dispatch({
                 type: EDIT_RECIPE,
                 payload: request
             });
-        }catch(error) {
+            notify.show(response.data.message, 'success', 5000);
+            callback()
+        })
+        .catch((error) => {
             dispatch({
                 type: "UNAUTHENTICATED",
                 payload: "Invalid or expired token please login again"
             })
-        }
+            notify.show(error.data.message, 'error', 5000);
+        });
     }
 }

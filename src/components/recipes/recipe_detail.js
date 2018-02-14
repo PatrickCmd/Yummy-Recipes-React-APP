@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
+import Notifications from 'react-notify-toast';
 
 import { fetchRecipe } from '../../actions/recipes';
 import RecipeEditModal from './recipe_edit_modal';
@@ -11,8 +12,17 @@ import recipeListImg from '../../img/recipe_detail.png'
 
 class RecipeDetail extends Component {
     componentDidMount() {
+        this.loadItem();
+    }
+
+    loadItem = () => {
         const { cat_id, recipe_id } = this.props.match.params;
         this.props.fetchRecipe(cat_id, recipe_id);
+    }
+
+    redirectTo = () => {
+        const { cat_id } = this.props.match.params;
+        this.props.history.push(`/categories/${cat_id}`)
     }
 
     renderItems(items) {
@@ -76,8 +86,9 @@ class RecipeDetail extends Component {
                     </div>
                 </div>
                 <div>
-                    <RecipeEditModal { ...this.props }/>
-                    <DeleteRecipeModal { ...this.props } />
+                    <RecipeEditModal reload = { this.loadItem }/>
+                    <DeleteRecipeModal redirect = { this.redirectTo } />
+                    <Notifications />
                 </div>
 
                 <hr className="featurette-divider" />

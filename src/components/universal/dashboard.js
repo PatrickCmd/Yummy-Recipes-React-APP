@@ -5,7 +5,6 @@ import Notifications from 'react-notify-toast';
 
 import CategoriesList from '../../components/catogories/category_list';
 import RecipesList from '../../components/recipes/recipe_list';
-import CategoryModal from '../../components/catogories/category_modal';
 
 class Dashboard extends Component {
 
@@ -30,8 +29,7 @@ class Dashboard extends Component {
                                 </small>
                             </h4>
                             <hr />
-                            <CategoriesList />
-                            <CategoryModal />
+                            <CategoriesList { ...this.props }/>
                         </div>
                     </div>
 

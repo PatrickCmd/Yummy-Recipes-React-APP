@@ -2,17 +2,25 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {Col, Button, Form, FormGroup, FormFeedback, FormText, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
+import Notifications from 'react-notify-toast';
 
 import { editRecipe } from '../../actions/recipes';
 
 class RecipeEditModal extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { value: props.recipe.name }
+    }
 
+    handleInputChange = (event) => {
+        this.setState({ value: event.target.value });
+    }
     // submiting form values
     _submit = (values) => {
-        const { recipe } = this.props;
+        const { recipe, reload } = this.props;
         this.props.editRecipe(values, recipe.cat_id, recipe.id, () => {
-            window.location.reload();
-            this.props.history.push(`/categories/${recipe.cat_id}/recipes/${recipe.id}`);
+            document.querySelector('#close').click();
+            reload();
         });
     }
     // handle form submition
@@ -33,7 +41,7 @@ class RecipeEditModal extends Component {
                 <div className="form-group row">
                     <label for="name" className="col-sm-3 col-form-label" name="name">Name</label>
                     <div className="col-sm-9">
-                        <input ref="name" type="text" className="form-control" value={ recipe.name } id="name" placeholder="Recipe name" />
+                        <input ref="name" type="text" className="form-control" value={ this.state.value } id="name" onChange = { this.handleInputChange } />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -81,6 +89,7 @@ class RecipeEditModal extends Component {
                         </div>
                     </div>
                 </div>
+                <Notifications />
             </div>
         );
     }

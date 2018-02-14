@@ -7,7 +7,11 @@ export default (state = {}, action) => {
         case "FETCHING":
             return null
         case FETCH_CATEGORIES:
-            return _.mapKeys(action.payload.data.recipe_categories, "id") // using lodash mapKeys to covert an array to an object
+            return {
+                        ...state,
+                        categories: _.mapKeys(action.payload.data.recipe_categories, "id"), // using lodash mapKeys to covert an array to an object
+                        categoryPagination: action.payload.data
+                    }
         case UNAUTHENTICATED:
             return {  ...state,  categories: {} };
         default:

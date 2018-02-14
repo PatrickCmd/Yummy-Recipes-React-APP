@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Notifications from 'react-notify-toast';
 import recipeListImg from '../../img/recipe_list_image.jpg'
 
 import { fetchRecipes } from '../../actions/recipes';
@@ -52,6 +53,46 @@ class RecipesList extends Component {
         });
     }
 
+    getPaginatedItems = (e) => {
+        e.preventDefault();
+        const value='';
+        this.props.fetchRecipes(value, e.target.dataset.page);
+    }
+
+    renderPagination = () => {
+        const { pagination } = this.props;
+        if(!pagination){
+            return (
+                <div>Loading pagination...</div>
+            );
+        }
+        const prevClass = `${pagination.previous_page ? 'page-item' : 'page-item disabled'}`;
+        const nextClass = `${pagination.next_page ? 'page-item' : 'page-item disabled'}`;
+        return (
+            <ul class="pagination justify-content-center">
+                <li className={ prevClass }>
+                    <a 
+                        className="page-link" href="#" tabindex="-1" 
+                        onClick = { this.getPaginatedItems } 
+                        data-page={ pagination.previous_page }>Previous
+                    </a>
+                </li>
+                <li className='page-item'>
+                    <a className="page-link" href="#">
+                        Page { pagination.current_page } of { pagination.pages }
+                    </a>
+                </li>
+                <li className={ nextClass }>
+                    <a 
+                        className="page-link" href="#" 
+                        onClick = { this.getPaginatedItems } 
+                        data-page={ pagination.next_page }>Next
+                    </a>
+                </li>
+            </ul>
+        );
+    }
+
     render() {
         return (
             <div>
@@ -70,14 +111,23 @@ class RecipesList extends Component {
                 </div>
                 <div className="row">
                     { this.renderRecipes() }
-                </div>
+                </div><br />
+
+                {/* pagination */}
+                <nav aria-label="...">
+                    { this.renderPagination() }
+                </nav>
+                <Notifications />
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    return { recipes: state.recipes }
+    return { 
+        recipes: state.recipes.recipes,
+        pagination: state.recipes.recipePagination 
+    }
 }
 
 export default connect(mapStateToProps, { fetchRecipes })(RecipesList);

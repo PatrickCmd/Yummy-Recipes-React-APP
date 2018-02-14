@@ -28,7 +28,6 @@ export const signInAction = ({ email, password }, history) => {
             history.push('/dashboard');
             notify.show('Successfully logged in!', 'success', 5000);
         }catch(error){
-            console.log(error.response);
             dispatch({
                 type: AUTHENTICATED_ERROR,
                 payload: 'Invalid email or password'

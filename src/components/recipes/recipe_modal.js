@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {Col, Button, Form, FormGroup, FormFeedback, FormText, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
+import Notifications from 'react-notify-toast';
 
 import { createRecipe } from '../../actions/recipes';
 
@@ -33,10 +34,10 @@ class RecipeModal extends Component {
 
     // method callback on form submission
     onSubmitForm = (values) => {
-        const { category } = this.props;
+        const { category, reloadItems } = this.props;
         this.props.createRecipe(values, category.id, () => {
-            window.location.reload();
-            this.props.history.push(`/categories/${category.id}`);
+            document.querySelector('#close').click();
+            reloadItems();
         });
     }
 
@@ -106,6 +107,7 @@ class RecipeModal extends Component {
                         </div>
                     </div>
                 </div>
+                <Notifications />
             </div>
         );
     }
