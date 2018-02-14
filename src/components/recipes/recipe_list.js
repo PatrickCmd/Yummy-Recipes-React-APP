@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Notifications from 'react-notify-toast';
 import recipeListImg from '../../img/recipe_list_image.jpg'
 
 import { fetchRecipes } from '../../actions/recipes';
@@ -116,6 +117,7 @@ class RecipesList extends Component {
                 <nav aria-label="...">
                     { this.renderPagination() }
                 </nav>
+                <Notifications />
             </div>
         );
     }
