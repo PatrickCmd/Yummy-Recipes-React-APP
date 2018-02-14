@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
+import Notifications from 'react-notify-toast';
 
 import CategoryRecipes from '../recipes/category_recipes';
-import RecipeModal from '../recipes/recipe_modal';
 import { fetchCategory } from '../../actions/categories';
 import recipeListImg from '../../img/recipe_detail.png'
 
@@ -46,9 +46,8 @@ class CategoryDetail extends Component {
                 <div className="row">
                     <CategoryRecipes /> 
                 </div>
-                <div>
-                    <RecipeModal />
-                </div>
+
+                <Notifications />
 
                 <hr className="featurette-divider" />
             </div>
