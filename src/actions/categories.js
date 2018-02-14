@@ -8,14 +8,24 @@ import { ROOT_URL, CREATE_CATEGORY, FETCH_CATEGORIES, FETCH_CATEGORY } from '../
     executed after submition 
 */
 export const createCategory = (values, callback) => {
-    const request = instance.post(`${ROOT_URL}/recipe_category`, values)
-        .then(() => callback());
-    
-    return {
-        type: CREATE_CATEGORY,
-        payload: request
+    return async (dispatch) => {
+        const request = instance.post(`${ROOT_URL}/recipe_category`, values)
+        .then((response) => {
+            dispatch({
+                type: CREATE_CATEGORY,
+                payload: request
+            });
+            callback();
+            notify.show(response.data.message, 'success', 5000);
+        })
+        .catch((error) => {
+            dispatch({
+                type: "UNAUTHENTICATED",
+                payload: "Invalid authentication credentials"
+            });
+            notify.show(error.response.data.message, 'error', 5000);
+        });
     }
-    notify.show(request.response.data.message, 'success', 5000);
 }
 
 export const fetching = () => {
