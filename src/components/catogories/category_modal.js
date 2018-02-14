@@ -7,14 +7,18 @@ import { createCategory } from '../../actions/categories';
 class CategoryModal extends Component {
 
     // submiting form values
-    _submit(values){
+    _submit = (values) => {
+        const { reloadItems } = this.props;
         this.props.createCategory(values, () => {
-            window.location.reload();
-            this.props.history.push("/dashboard");
+            for (const field in this.refs) {
+                this.refs[field].value = '';
+            }
+            document.querySelector('#close').click();
+            reloadItems();
         });
     }
     // handle form submition
-    _onhandleSubmit(event) {
+    _onhandleSubmit = (event) => {
         event.preventDefault();
         const formData = {};
         for (const field in this.refs) {
@@ -27,7 +31,7 @@ class CategoryModal extends Component {
     renderForm() {
         return (
             <div>
-                <form id="catForm" onSubmit={ this._onhandleSubmit.bind(this) }>
+                <form id="catForm" onSubmit={ this._onhandleSubmit }>
                     <div className="form-group row">
                         <label for="name" className="col-sm-3 col-form-label" name="name">Name</label>
                         <div className="col-sm-9">
