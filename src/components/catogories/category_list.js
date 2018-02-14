@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Notifications from 'react-notify-toast';
 
+import CategoryModal from '../../components/catogories/category_modal';
 import { fetchCategories } from '../../actions/categories';
 
 class CategoriesList extends Component {
     componentDidMount() {
         this.props.fetchCategories();
     }
+
 
     renderCategories() {
         const { categories } = this.props;
@@ -32,6 +34,10 @@ class CategoriesList extends Component {
     getPaginatedItems = (e) => {
         e.preventDefault();
         this.props.fetchCategories(e.target.dataset.page);
+    }
+    
+    reloadCategories = () => {
+        this.props.fetchCategories();
     }
 
     renderPagination = () => {
@@ -78,7 +84,7 @@ class CategoriesList extends Component {
                 <nav aria-label="...">
                     { this.renderPagination() }
                 </nav>
-
+                <CategoryModal reloadItems = { this.reloadCategories }/>
                 <Notifications />
             </div>
         );
