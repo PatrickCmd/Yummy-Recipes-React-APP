@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Notifications from 'react-notify-toast';
 
 import { deleteRecipe } from '../../actions/recipes'
 
@@ -7,10 +8,10 @@ class DeleteRecipeModal extends Component {
 
     // method to handle delete of recipe
     handleDelete = () => {
-        const { recipe } = this.props;
+        const { recipe, redirect } = this.props;
         this.props.deleteRecipe(recipe.cat_id, recipe.id, () => {
-            window.location.reload();
-            this.props.history.push(`/categories/${recipe.cat_id}`)
+            document.querySelector('#close').click();
+            redirect();
         });
     }
 
@@ -36,7 +37,8 @@ class DeleteRecipeModal extends Component {
                         </div>
                     </div>
                 </div>
-        </div>
+                <Notifications />
+            </div>
         );
     }
 }
