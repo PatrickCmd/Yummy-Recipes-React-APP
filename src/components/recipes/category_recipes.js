@@ -50,19 +50,67 @@ class CategoryRecipes extends Component {
         });
     }
 
+    getPaginatedItems = (e) => {
+        e.preventDefault();
+        const { id } = this.props.match.params;
+        this.props.fetchCategoryRecipes(id, e.target.dataset.page);
+    }
+
+    renderPagination = () => {
+        const { pagination } = this.props;
+        if(!pagination){
+            return (
+                <div>Loading pagination...</div>
+            );
+        }
+        const prevClass = `${pagination.previous_page ? 'page-item' : 'page-item disabled'}`;
+        const nextClass = `${pagination.next_page ? 'page-item' : 'page-item disabled'}`;
+        return (
+            <ul class="pagination justify-content-center">
+                <li className={ prevClass }>
+                    <a 
+                        className="page-link" href="#" tabindex="-1" 
+                        onClick = { this.getPaginatedItems } 
+                        data-page={ pagination.previous_page }>Previous
+                    </a>
+                </li>
+                <li className='page-item'>
+                    <a className="page-link" href="#">
+                        Page { pagination.current_page } of { pagination.pages }
+                    </a>
+                </li>
+                <li className={ nextClass }>
+                    <a 
+                        className="page-link" href="#" 
+                        onClick = { this.getPaginatedItems } 
+                        data-page={ pagination.next_page }>Next
+                    </a>
+                </li>
+            </ul>
+        );
+    }
+
     render() {
         return (
             <div>
                 <div className="row">
                     { this.renderRecipes() }
-                </div>
+                </div><br />
+
+                {/* pagination */}
+                <nav aria-label="...">
+                    { this.renderPagination() }
+                </nav>
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    return { recipes: state.category.category_recipes }
+    return { 
+        recipes: state.category.category_recipes,
+        pagination: state.category.recipePagination
+    }
 }
 
 export default withRouter(connect(mapStateToProps, { fetchCategoryRecipes })(CategoryRecipes));
