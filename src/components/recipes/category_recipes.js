@@ -3,12 +3,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import Notifications from 'react-notify-toast';
 import recipeListImg from '../../img/recipe_img.jpg'
 
+import RecipeModal from '../recipes/recipe_modal';
 import { fetchCategoryRecipes } from '../../actions/recipes';
 
 class CategoryRecipes extends Component {
     componentDidMount() {
+        const { id } = this.props.match.params;
+        this.props.fetchCategoryRecipes(id);
+    }
+
+    reloadRecipes = () => {
         const { id } = this.props.match.params;
         this.props.fetchCategoryRecipes(id);
     }
@@ -101,6 +108,11 @@ class CategoryRecipes extends Component {
                 <nav aria-label="...">
                     { this.renderPagination() }
                 </nav>
+
+                <div>
+                    <RecipeModal reloadItems = { this.reloadRecipes }/>
+                </div>
+                <Notifications />
             </div>
         );
     }
