@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import {Col, Button, Form, FormGroup, FormFeedback, FormText, Label, Input } from 'reactstrap';
+import {Col, Form, FormGroup, FormFeedback, FormText, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import Notifications from 'react-notify-toast';
 

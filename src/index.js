@@ -1,12 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import promise from 'redux-promise';
-import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
-import logger from 'redux-logger'
 
 import './style/style.css';
 import registerServiceWorker from './registerServiceWorker';
