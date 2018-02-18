@@ -61,20 +61,18 @@ class CarouselComponent extends Component {
 
     render() {
         const { activeIndex } = this.state;
-        const slides = items.map((item) => {
-            return (
-                <CarouselItem 
-                    onExiting = { this.onExiting }
-                    onExited = { this.onExited }
-                    key = { item.src }
-                >
-                    <div className="carouselimg">
-                        <img src={ item.src } alt={ item.altText } />
-                    </div>
-                    <CarouselCaption captionText={ item.caption } captionHeader={ item.caption } />
-                </CarouselItem>
-            );
-        });
+        const slides = items.map((item) => (
+            <CarouselItem 
+                onExiting = { this.onExiting }
+                onExited = { this.onExited }
+                key = { item.src }
+            >
+                <div className="carouselimg">
+                    <img src={ item.src } alt={ item.altText } />
+                </div>
+                <CarouselCaption captionText={ item.caption } captionHeader={ item.caption } />
+            </CarouselItem>  
+        ));
 
         return (
             <Carousel 

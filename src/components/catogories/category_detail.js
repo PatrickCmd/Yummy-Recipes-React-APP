@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button } from 'reactstrap';
 import Notifications from 'react-notify-toast';
 
 import CategoryRecipes from '../recipes/category_recipes';
@@ -16,7 +15,6 @@ class CategoryDetail extends Component {
 
     render() {
         const { category } = this.props;
-        const cardStyle = {width: '18rem'};
         const imgSrc = recipeListImg;
         if (!category){
             return (
@@ -28,7 +26,7 @@ class CategoryDetail extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="card">
-                            <img className="card-img-top" src={ imgSrc } alt="Card image cap" />
+                            <img className="card-img-top" src={ imgSrc } />
                             <div className="card-body">
                                 <h5 className="card-title">
                                     <Link to={`/categories/${category.id}`}>{  category.name }</Link>

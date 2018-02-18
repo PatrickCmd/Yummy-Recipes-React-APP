@@ -14,26 +14,48 @@ export const login = (res) => {
     }
 }
 
+// export const signInAction = ({ email, password }, history) => {
+//     return async (dispatch) => {
+//         try {
+//             const request = await axios.post(`${ROOT_URL}/auth/login`, { email, password });
+
+//             dispatch({ 
+//                 type: AUTHENTICATED, 
+//                 user: jwt.decode(request.data.auth_token),
+//                 payload: request
+//              });
+//             localStorage.setItem('current_user', request.data.auth_token);
+//             history.push('/dashboard');
+//             notify.show('Successfully logged in!', 'success', 5000);
+//         }catch(error){
+//             dispatch({
+//                 type: AUTHENTICATED_ERROR,
+//                 payload: 'Invalid email or password'
+//             });
+//             notify.show(error.response.data.message, 'error', 5000);
+//         }
+//     }
+// }
+
 export const signInAction = ({ email, password }, history) => {
     return async (dispatch) => {
-        try {
-            const request = await axios.post(`${ROOT_URL}/auth/login`, { email, password });
-
+        const request = await axios.post(`${ROOT_URL}/auth/login`, { email, password })
+        .then((response) => {
             dispatch({ 
                 type: AUTHENTICATED, 
-                user: jwt.decode(request.data.auth_token),
-                payload: request
-             });
-            localStorage.setItem('current_user', request.data.auth_token);
+                user: jwt.decode(response.data.auth_token),
+            });
+            localStorage.setItem('current_user', response.data.auth_token);
             history.push('/dashboard');
             notify.show('Successfully logged in!', 'success', 5000);
-        }catch(error){
+        })
+        .catch((error) => {
             dispatch({
                 type: AUTHENTICATED_ERROR,
                 payload: 'Invalid email or password'
             });
-            notify.show(error.response.data.message, 'error', 5000);
-        }
+           notify.show(error.response.data.message, 'error', 5000);
+        });
     }
 }
 

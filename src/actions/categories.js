@@ -13,7 +13,7 @@ export const createCategory = (values, callback) => {
         .then((response) => {
             dispatch({
                 type: CREATE_CATEGORY,
-                payload: request
+                payload: response
             });
             callback();
             notify.show(response.data.message, 'success', 5000);

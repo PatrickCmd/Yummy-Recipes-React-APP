@@ -22,14 +22,13 @@ class CategoryRecipes extends Component {
 
     renderRecipes() {
         const { recipes } = this.props;
-        const cardStyle = {width: '18rem'};
         if (!recipes) {
             return (
                 <div>Loading...</div>
             );
         }
 
-        if(_.size(recipes) == 0) {
+        if(_.size(recipes) === 0) {
             return (
                 <div className="alert alert-info">
                     Category has no recipes in it yet. Click <strong>Add Recipe</strong> to add recipes
@@ -43,7 +42,7 @@ class CategoryRecipes extends Component {
             return (
                 <div className="col-md-6" key={ recipe.id }>
                     <div className="card">
-                        <img className="card-img-top" src={ imgSrc } alt="Card image cap" />
+                        <img className="card-img-top" src={ imgSrc } />
                         <div className="card-body">
                             <h5 className="card-title">{ recipe.name }</h5>
                             <p className="card-text">

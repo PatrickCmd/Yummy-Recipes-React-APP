@@ -37,7 +37,6 @@ class Signin extends Component {
     // method to return an error message if signin fails
     errorMessage = ()=> {
         if (this.props.errorMessage) {
-            console.log(this.props.errorMessage);
             return (
                 <div className="info-red">
                     { this.props.errorMessage }
@@ -76,7 +75,7 @@ class Signin extends Component {
                                 />
                                 <Button type="submit" color="primary">Sign in</Button>
                             </Form>
-                            <Link to="/signup">DON'T HAVE AN ACCOUNT? SIGN UP <i class="fa fa-arrow-right"></i></Link>
+                            <Link to="/signup">DON'T HAVE AN ACCOUNT? SIGN UP <i className="fa fa-arrow-right"></i></Link>
                         </div>
                     </div>
                     <hr className="featurette-divider" />
