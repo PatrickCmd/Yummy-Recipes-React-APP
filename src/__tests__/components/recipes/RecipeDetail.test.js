@@ -10,14 +10,14 @@ import { Link } from 'react-router-dom';
 import {configure, mount, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16'
 import { BrowserRouter as Router } from 'react-router-dom';
-import RecipeDetail from '../../../components/recipes/recipe_detail';
+import { RecipeDetail } from '../../../components/recipes/recipe_detail';
 
 const middlewares = [reduxThunk];
 const mockStore = configureStore(middlewares);
 
 configure({adapter: new Adapter()});
 
-describe('RecipesList', () => {
+describe('Recipes Detail', () => {
     let store, wrapper;
     let state = {
         auth: {
@@ -43,9 +43,7 @@ describe('RecipesList', () => {
             ingredients: "Mangoes, Oranges",
             directions: "Cut and mix"
         },
-        fetchRecipe: () => ({
-            recipe
-        })
+        fetchRecipe: () => Promise.resolve()
     }
 
     beforeEach(() => {
@@ -56,7 +54,7 @@ describe('RecipesList', () => {
         shallow(
             <Provider store={store}>
                 <Router>
-                    <RecipeDetail />
+                    <RecipeDetail { ...props } />
                 </Router>
             </Provider>
         );
