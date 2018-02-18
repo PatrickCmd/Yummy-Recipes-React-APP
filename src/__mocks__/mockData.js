@@ -15,6 +15,12 @@ const mockData = {
         last_name: "Walukagga",
         email: "pwalukagga@gmail.com",
         password: "pato1234"
+    },
+
+    categories: {
+        "1": {id: 1, name: "Lunch", description: "Awesome lunch"},
+        "2": {id: 2, name: "Dinner", description: "Awesome dinner"},
+        "3": {id: 2, name: "Supper", description: "Awesome Supper"},
     }
 }
 

@@ -39,6 +39,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "jest-localstorage-mock": "^2.2.0",
     "moxios": "^0.4.0",
     "sinon": "^4.3.0"
   }

@@ -93,7 +93,6 @@ class RecipeEditModal extends Component {
     }
 }
 
-
 const mapStateToProps = (state) => {
     return { recipe: state.recipe.recipe_item };
 }
