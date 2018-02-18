@@ -142,7 +142,7 @@ export const fetchRecipe = (cat_id, recipe_id) =>{
         .then((response) => {
             dispatch({
                 type: FETCH_RECIPE,
-                payload: request
+                payload: response
             })
         })
         .catch((error) => {
@@ -164,7 +164,7 @@ export const deleteRecipe = (cat_id, recipe_id, callback) => {
         .then((response) => {
             dispatch({
                 type: DELETE_RECIPE,
-                payload: response
+                payload: request
             });
             callback();
             notify.show(response.data.message, 'success', 5000);
