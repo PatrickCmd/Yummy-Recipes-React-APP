@@ -44,24 +44,36 @@ export const fetchCat = (res) => {
 // action creator for fetching categories from the database
 export const fetchCategories = (page) => {
     return async (dispatch) => {
-        try {
-            dispatch(fetching);
-            if(page) {
-                const limit = 10;
-                const request = await instance.get(`${ROOT_URL}/recipe_category?limit=${limit}&page=${page}`);
-                dispatch(fetchCat(request));
-            }else {
-                const limit = 10;
-                const request = await instance.get(`${ROOT_URL}/recipe_category?limit=${limit}`);
-                dispatch(fetchCat(request));
-            }
-        }catch(error) {
-            dispatch({
-                type: "UNAUTHENTICATED",
-                payload: "Invalid authentication credentials"
+        dispatch(fetching);
+        if(page) {
+            const limit = 10;
+            const request = await instance.get(`${ROOT_URL}/recipe_category?limit=${limit}&page=${page}`)
+            .then((response) => {
+                dispatch(fetchCat(response));
+            })
+            .catch((error) => {
+                dispatch({
+                    type: "UNAUTHENTICATED",
+                    payload: "Invalid authentication credentials"
+                });
+                localStorage.removeItem('current_user');
+                notify.show(error.response.data.message, 'error', 5000);
             });
-            localStorage.removeItem('current_user');
-            notify.show(error.response.data.message, 'error', 5000);
+            
+        }else {
+            const limit = 10;
+            const request = await instance.get(`${ROOT_URL}/recipe_category?limit=${limit}`)
+            .then((response) => {
+                dispatch(fetchCat(response));
+            })
+            .catch((error) => {
+                dispatch({
+                    type: "UNAUTHENTICATED",
+                    payload: "Invalid authentication credentials"
+                });
+                localStorage.removeItem('current_user');
+                notify.show(error.response.data.message, 'error', 5000);
+            });
         }
     }
 }

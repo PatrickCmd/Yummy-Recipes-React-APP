@@ -7,7 +7,7 @@ import Notifications from 'react-notify-toast';
 import CategoryModal from '../../components/catogories/category_modal';
 import { fetchCategories } from '../../actions/categories';
 
-class CategoriesList extends Component {
+export class CategoriesList extends Component {
     componentDidMount() {
         this.props.fetchCategories();
     }

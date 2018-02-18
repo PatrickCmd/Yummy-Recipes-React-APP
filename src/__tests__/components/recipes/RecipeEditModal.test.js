@@ -47,7 +47,7 @@ describe('Recipes Editing', () => {
         shallow(
             <Provider store={store}>
                 <Router>
-                    <RecipeEditModal />
+                    <RecipeEditModal { ...props } />
                 </Router>
             </Provider>
         );
