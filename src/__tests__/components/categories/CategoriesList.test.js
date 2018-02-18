@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import {configure, mount, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16'
 import { BrowserRouter as Router } from 'react-router-dom';
-import CategoriesList from '../../../components/catogories/category_list';
+import { CategoriesList } from '../../../components/catogories/category_list';
 import mockData from '../../../__mocks__/mockData';
 import mockLocalStorage from '../../../__mocks__/mockLocalStorage';
 
@@ -34,15 +34,14 @@ describe('Category List', () => {
 
     const props = {
         categories: state.categories,
-        fetchCategories: () => {}
+        fetchCategories: () => Promise.resolve()
     }
 
     beforeEach(() => {
         store = mockStore(state);
-        console.log(localStorage);
     });
     it('it renders without crashing', () => {
-        shallow(
+        mount(
             <Provider store={store}>
                 <Router>
                     <CategoriesList { ...props } />

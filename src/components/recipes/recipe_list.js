@@ -7,7 +7,7 @@ import recipeListImg from '../../img/recipe_list_image.jpg'
 
 import { fetchRecipes } from '../../actions/recipes';
 
-class RecipesList extends Component {
+export class RecipesList extends Component {
 
     componentDidMount() {
         this.props.fetchRecipes();
