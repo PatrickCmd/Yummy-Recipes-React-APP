@@ -16,11 +16,15 @@ const mockData = {
         email: "pwalukagga@gmail.com",
         password: "pato1234"
     },
-
     categories: {
         "1": {id: 1, name: "Lunch", description: "Awesome lunch"},
         "2": {id: 2, name: "Dinner", description: "Awesome dinner"},
         "3": {id: 2, name: "Supper", description: "Awesome Supper"},
+    },
+    recipes: {
+        "1": {id: 1, name: "Lunch recipe", description: "Awesome lunch", ingredients: "food, juice", directions: "Prepare well"},
+        "2": {id: 2, name: "Dinner recipe", description: "Awesome dinner", ingredients: "food, juice", directions: "Prepare well"},
+        "3": {id: 2, name: "Supper recipe", description: "Awesome Supper", ingredients: "food, juice", directions: "Prepare well"},
     }
 }
 
