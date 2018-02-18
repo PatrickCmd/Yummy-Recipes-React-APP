@@ -8,7 +8,7 @@ import RecipeEditModal from './recipe_edit_modal';
 import DeleteRecipeModal from './delete_recipe_modal';
 import recipeListImg from '../../img/recipe_detail.png'
 
-class RecipeDetail extends Component {
+export class RecipeDetail extends Component {
     componentDidMount() {
         this.loadItem();
     }
