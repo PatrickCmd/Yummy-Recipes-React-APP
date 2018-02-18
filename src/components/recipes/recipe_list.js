@@ -20,14 +20,13 @@ class RecipesList extends Component {
 
     renderRecipes() {
         const { recipes } = this.props;
-        const cardStyle = {width: '180rem'};
         if (!recipes) {
             return (
                 <div>Loading...</div>
             );
         }
 
-        if(_.size(recipes) == 0) {
+        if(_.size(recipes) === 0) {
             return (
                 <div className="alert alert-info">
                     You do not have recipes yet, first add categories and then recipes
@@ -41,7 +40,7 @@ class RecipesList extends Component {
             return (
                 <div className="col-md-6" key={ recipe.id }>
                     <div className="card">
-                        <img className="card-img-top" src={ imgSrc } alt="Card image cap" />
+                        <img className="card-img-top" src={ imgSrc } />
                         <div className="card-body">
                             <h5 className="card-title">{ recipe.name }</h5>
                             <p className="card-text">{ recipe.description }</p>

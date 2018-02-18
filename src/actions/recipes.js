@@ -10,7 +10,7 @@ export const createRecipe = (values, cat_id, callback) => {
         .then((response) => {
             dispatch({
                 type: CREATE_RECIPE,
-                payload: request
+                payload: response
             });
             callback();
             console.log("Sucess: ", response.data.message);
@@ -132,7 +132,7 @@ export const deleteRecipe = (cat_id, recipe_id, callback) => {
         .then((response) => {
             dispatch({
                 type: DELETE_RECIPE,
-                payload: request
+                payload: response
             });
             callback();
             notify.show(response.data.message, 'success', 5000);
@@ -142,7 +142,7 @@ export const deleteRecipe = (cat_id, recipe_id, callback) => {
                 type: "UNAUTHENTICATED",
                 payload: "Invalid or expired token please login again"
             })
-            notify.show(error.data.message, 'error', 5000);
+            notify.show(error.response.data.message, 'error', 5000);
         });
     }
 }
@@ -164,7 +164,7 @@ export const editRecipe = (values, cat_id, recipe_id, callback) => {
                 type: "UNAUTHENTICATED",
                 payload: "Invalid or expired token please login again"
             })
-            notify.show(error.data.message, 'error', 5000);
+            notify.show(error.response.data.message, 'error', 5000);
         });
     }
 }

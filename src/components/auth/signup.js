@@ -14,7 +14,7 @@ class Signup extends Component {
     renderField(field) {
         //de-structuring from the field object
         const { meta: { touched, error } } = field;
-        const isValid = touched && error ? false : '';
+        const isValid = touched && error ? false : true;
         return (
             <FormGroup>
                 <Label htmlFor={ field.htmlfor }>{ field.label }</Label>
@@ -43,7 +43,7 @@ class Signup extends Component {
             <div>
                 <CarouselComponent />
                 <div className="container">
-                    <div class="row justify-content-md-center">
+                    <div className="row justify-content-md-center">
                         <div className="col-md-6">
                             <h3>CREATE ACCOUNT</h3>
                             <hr />
@@ -82,7 +82,7 @@ class Signup extends Component {
                                 />
                                 <Button type="submit" color="primary">Sign up</Button>
                             </Form>
-                            <Link to="/signin">ALREADY A MEMBER! SIGN IN <i class="fa fa-arrow-right"></i></Link>
+                            <Link to="/signin">ALREADY A MEMBER! SIGN IN <i className="fa fa-arrow-right"></i></Link>
                         </div>
                     </div>
                     <hr className="featurette-divider" />

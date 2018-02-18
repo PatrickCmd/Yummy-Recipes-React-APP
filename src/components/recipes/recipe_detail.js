@@ -1,8 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Button } from 'reactstrap';
 import Notifications from 'react-notify-toast';
 
 import { fetchRecipe } from '../../actions/recipes';
@@ -37,7 +35,6 @@ class RecipeDetail extends Component {
 
     render() {
         const { recipe } = this.props;
-        const cardStyle = {width: '18rem'};
         const imgSrc = recipeListImg;
         if (!recipe){
             return (
@@ -49,7 +46,7 @@ class RecipeDetail extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="card">
-                            <img className="card-img-top" src={ imgSrc } alt="Card image cap" />
+                            <img className="card-img-top" src={ imgSrc } />
                             <div className="card-body">
                                 <h5 className="card-title">{ recipe.name }</h5>
                                 <p className="card-text">
