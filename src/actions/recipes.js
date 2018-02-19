@@ -20,7 +20,7 @@ export const createRecipe = (values, cat_id, callback) => {
                 type: "UNAUTHENTICATED",
                 payload: "Invalid authentication credentials"
             });
-            notify.show(error.data.message, 'error', 5000);
+            notify.show(error.response.data.message, 'error', 5000);
         });
     }
     
