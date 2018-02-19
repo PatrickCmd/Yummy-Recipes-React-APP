@@ -1,5 +1,4 @@
-// export const ROOT_URL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_BASE_URL : 'http://localhost:5000';
-export const ROOT_URL = 'https://yummy-recipe-api.herokuapp.com';
+export const ROOT_URL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_BASE_URL : 'http://localhost:5000';
 export const AUTHENTICATED = 'authenticated_user';
 export const UNAUTHENTICATED = 'unauthenticated_user';
 export const AUTHENTICATED_ERROR = 'authenticated_error';
