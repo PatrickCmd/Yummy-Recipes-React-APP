@@ -46,7 +46,7 @@ export const fetchRecipes = (value, page) => {
         dispatch(fetching);
         if(value){
             const limit = 4;
-            let request = await instance.get(`${ROOT_URL}/recipes?q=${value}&limit=${limit}`)
+            let request = await instance.get(`${ROOT_URL}/search_recipes?q=${value}&limit=${limit}`)
             .then((response) => {
                 dispatch(fetchRec(response));
             })
