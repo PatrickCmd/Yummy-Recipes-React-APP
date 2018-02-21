@@ -14,3 +14,5 @@ export const CREATE_CATEGORY = 'create_category';
 export const CREATE_RECIPE = 'create_recipe';
 export const DELETE_RECIPE = 'delete_recipe';
 export const EDIT_RECIPE = 'edit_recipe';
+export const IS_LOADING = 'is_loading';
+export const NOT_LOADING = 'not_loading';
