@@ -47,6 +47,7 @@ exports[`Recipes Creation it has valid snapshot 1`] = `
             <form
               className=""
               id="recipeForm"
+              name="recipeForm"
               onSubmit={[Function]}
             >
               <div
