@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Button, Form, FormGroup, FormFeedback, Label, Input} from 'reactstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Notifications, { notify } from 'react-notify-toast';
+import Notifications from 'react-notify-toast';
 
 import CarouselComponent from '../universal/carousel';
 import { signInAction } from '../../actions/index';
