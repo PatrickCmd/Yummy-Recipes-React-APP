@@ -5,7 +5,7 @@
 
 Yummy recipes app is an application that allows users to create, save and share meeting the needs of keeping track of awesome food recipes.
 
-*Client App consumes the api at this githup repo [url](https://github.com/PatrickCmd/Yummy-Recipe-RestAPI/) and API documentation and Live production for this [Link](https://yummy-recipe-api.herokuapp.com/)*
+*Client App consumes the api at this githup repo [url](https://github.com/PatrickCmd/Yummy-Recipe-RestAPI/) and API documentation and Live production follow this [Link](https://yummy-recipe-api.herokuapp.com/)*
 
 ## Installation
 First clone this repository
@@ -34,4 +34,4 @@ $ npm test -- -coverage
 ```
 
 ## Live APP
-Follow this [Link](https://yummy-react-client.herokuapp.com/) to see the in live production
+Follow this [Link](https://yummy-react-client.herokuapp.com/) to see the app in live production

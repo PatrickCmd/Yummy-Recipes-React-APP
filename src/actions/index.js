@@ -4,6 +4,7 @@ import { notify } from 'react-notify-toast';
 
 import instance from './AxiosInstance';
 import { ROOT_URL, REGISTER, AUTHENTICATED, UNAUTHENTICATED, AUTHENTICATED_ERROR } from '../constants';
+import { deactivateLoading } from './loaders';
 
 // action creator for signing in user
 export const login = (res) => {
@@ -48,6 +49,7 @@ export const signInAction = ({ email, password }, history) => {
             localStorage.setItem('current_user', response.data.auth_token);
             history.push('/dashboard');
             notify.show('Successfully logged in!', 'success', 5000);
+            dispatch(deactivateLoading());
         })
         .catch((error) => {
             dispatch({
@@ -55,6 +57,7 @@ export const signInAction = ({ email, password }, history) => {
                 payload: 'Invalid email or password'
             });
            notify.show(error.response.data.message, 'error', 5000);
+           dispatch(deactivateLoading());
         });
     }
 }

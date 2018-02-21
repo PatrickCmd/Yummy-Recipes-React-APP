@@ -17,6 +17,9 @@ describe('Signin', () => {
         auth: {
             authenticated: false
         },
+        loader: {
+            isLoading: false
+        },
         form: {},
         categories: {},
         category: {},

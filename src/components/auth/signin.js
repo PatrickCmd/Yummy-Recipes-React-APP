@@ -7,6 +7,8 @@ import Notifications from 'react-notify-toast';
 
 import CarouselComponent from '../universal/carousel';
 import { signInAction } from '../../actions/index';
+import { activateLoading } from '../../actions/loaders';
+import { Loading } from '../universal/loader';
 
 class Signin extends Component {
 
@@ -30,8 +32,9 @@ class Signin extends Component {
     }
 
     // method callback on form submission
-    onSubmitForm = (values) => {
+    onSubmitForm = (values, dispatch) => {
         this.props.signInAction(values, this.props.history);
+        dispatch(activateLoading());  // activate loading
     }
 
     // method to return an error message if signin fails
@@ -46,7 +49,8 @@ class Signin extends Component {
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, loader } = this.props;
+        console.log("Loader: ", loader);
         return (
             <div>
                 <CarouselComponent />
@@ -73,7 +77,9 @@ class Signin extends Component {
                                     id="password"
                                     component={ this.renderField }
                                 />
-                                <Button type="submit" color="primary">Sign in</Button>
+                                { loader ? <Loading /> :
+                                    <Button type="submit" color="primary">Sign in</Button>
+                                }
                             </Form>
                             <Link to="/signup">DON'T HAVE AN ACCOUNT? SIGN UP <i className="fa fa-arrow-right"></i></Link>
                         </div>
@@ -102,7 +108,10 @@ const validate = (values) => {
 }
 
 const mapStateToProps = (state) => {
-    return { errorMessage: state.auth.error };
+    return { 
+        errorMessage: state.auth.error,
+        loader: state.loader.isLoading
+    };
 }
 
 const reduxFormSignin = reduxForm({
