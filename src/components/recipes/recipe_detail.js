@@ -48,7 +48,10 @@ export class RecipeDetail extends Component {
                         <div className="card">
                             <img className="card-img-top" src={ imgSrc } />
                             <div className="card-body">
-                                <h5 className="card-title">{ recipe.name }</h5>
+                                <h5 className="card-title">
+                                    { recipe.name } in category {'  '}   
+                                    <small><a href={`/categories/${recipe.cat_id}`}>{ recipe.cat_name }</a></small>
+                                </h5>
                                 <p className="card-text">
                                     { recipe.description }
                                 </p>
@@ -95,7 +98,9 @@ export class RecipeDetail extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { recipe: state.recipe.recipe_item };
+    return { 
+        recipe: state.recipe.recipe_item
+    };
 }
 
 export default connect(mapStateToProps, { fetchRecipe })(RecipeDetail);
