@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, reset } from 'redux-form';
 import {Col, Form, FormGroup, FormFeedback, FormText, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import Notifications from 'react-notify-toast';
@@ -21,6 +21,7 @@ class RecipeModal extends Component {
                         { field.text }
                     </FormText>
                     <Input 
+                        ref = { field.name }
                         type={ field.type }
                         id={ field.id }
                         { ...field.input }
@@ -45,7 +46,7 @@ class RecipeModal extends Component {
         const { handleSubmit } = this.props;
         return (
             <div>
-                <Form onSubmit={ handleSubmit(this.onSubmitForm.bind(this)) } id="recipeForm">
+                <Form onSubmit={ handleSubmit(this.onSubmitForm.bind(this)) } id="recipeForm" name="recipeForm">
                     <Field 
                         label="Recipe name"
                         name="name"
@@ -135,13 +136,20 @@ const validate = (values) => {
     return errors
 }
 
+const afterSubmit = (result, dispatch) =>
+  dispatch(reset('RecipeForm'));
+
+
 const mapStateToProps = (state) => {
     return { category: state.category.category_item };
 }
 
-export default reduxForm({
+const RecipeForm =  reduxForm({
     validate,
-    form: 'RecipeForm'
+    form: 'RecipeForm',
+    onSubmitSuccess: afterSubmit
 })(
     connect(mapStateToProps, { createRecipe })(RecipeModal)
 );
+
+export default RecipeForm;
