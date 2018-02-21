@@ -10,6 +10,7 @@ import categoriesReducer from './categories_reducer';
 import categoryReducer from './category_reducer';
 import recipesReducer from './recipes_reducer';
 import recipeReducer from './recipe_reducer';
+import loaderReducer from './loader_reducer';
 
 /* reducers for the entire project */
 const rootReducer = combineReducers({
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     categories: categoriesReducer,
     category: categoryReducer,
     recipes: recipesReducer,
-    recipe: recipeReducer
+    recipe: recipeReducer,
+    loader: loaderReducer,
 });
 
 const createStoreWithMiddleware = applyMiddleware(promise, reduxThunk,logger)(createStore);
