@@ -70,7 +70,7 @@ export const signUpAction = (values, callback) => {
 
             dispatch({
                 type: REGISTER,
-                payload: request
+                payload: {message: "Successfully registered", status: "success"}
             });
             callback();
             notify.show('Successfully registered, please login!', 'success', 5000);
@@ -93,7 +93,10 @@ export const signOutAction = () => {
             localStorage.clear();
             dispatch({
                 type: UNAUTHENTICATED,
-                payload: request
+                payload: {
+                    message: "User has logged out successfully.",
+                    status: "success"
+                }
             });
         }catch(error){
             dispatch({
