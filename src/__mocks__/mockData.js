@@ -5,7 +5,7 @@ const mockData = {
     },
     authResponse: {
         data: {
-            "auth_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MTg2MTQzNzUsImlhdCI6MTUxODUyNzk3NSwidXNlcl9pZCI6MywiZW1haWwiOiJwd2FsdWthZ2dhQGdtYWlsLmNvbSIsImZpcnN0X25hbWUiOiJQYXRyaWNrIiwibGFzdF9uYW1lIjoiV2FsdWthZ2dhIiwicHVibGljX2lkIjoiNzNjMzk2MWUtZWE1YS00ZDBjLTlmYjgtNjdiMmU3ZGQyMzhhIn0._v1tjLCmJAL15w-vryXOlu1RkwEzN3Jsx82To5jr-Ek",
+            "auth_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTEyODU1MjEsImlhdCI6MTUxOTc0OTUyMSwidXNlcl9pZCI6NCwiZW1haWwiOiJwYXRyaWNrLndhbHVrYWdnYUBhbmRlbGEuY29tIiwiZmlyc3RfbmFtZSI6IlBhdHJpY2siLCJsYXN0X25hbWUiOiJXYWx1a2FnZ2EiLCJwdWJsaWNfaWQiOiJiYjFkNTFlMC0xNGIzLTQyMjAtYmU0NS0zOTdhZTViZTlkOTAifQ.a624_Hg_ElxuGvqUHhhRWbhwGg4uSd9EU9Glq7oCuik",
             "message": "Successfully logged in",
             "status": "success"
         }
@@ -15,6 +15,14 @@ const mockData = {
         last_name: "Walukagga",
         email: "pwalukagga@gmail.com",
         password: "pato1234"
+    },
+    regResponse: {
+        message: "Successfully registered",
+        status: "success"
+    },
+    logoutResponse: {
+        message: "User has logged out successfully.",
+        status: "success"
     },
     categories: {
         "1": {id: 1, name: "Lunch", description: "Awesome lunch"},
