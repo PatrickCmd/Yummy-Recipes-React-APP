@@ -13,17 +13,26 @@ const middlewares = [reduxThunk];
 const mockStore = configureStore(middlewares);
 
 describe('Auth Actions', () => {
-    beforeEach(() => { moxios.install(instance) });
-    afterEach(() => { moxios.uninstall(instance) });
+    let originalTimeout;
+    beforeEach(() => { 
+        moxios.install(instance)
+    });
+    afterEach(() => { 
+        moxios.uninstall(instance) 
+        // moxios.uninstall() 
+    });
 
-    it('creates AUTHENTICATED when signin action is successful', async () => {
+    it('creates AUTHENTICATED when signin action is successful', async (done) => {
         const { signInData, authResponse } = mockData;
+
+        const payload = authResponse.data;
         moxios.wait(() => {
             const request = moxios.requests.mostRecent();
             request.respondWith({
               status: 201,
-              response: authResponse,
+              response: payload,
             });
+            done();
         });
         const expectedActions = [
             { 
@@ -32,12 +41,65 @@ describe('Auth Actions', () => {
             }
         ]
 
-        // const store = mockStore({});
-        // return store.dispatch(signInAction(signInData, history)).then(() => {
-        //     // return of async actions
-        //     expect(store.getActions()).toEqual(expectedActions);
-        // });
-        
-        
+        const store = mockStore({});
+        return store.dispatch(signInAction(signInData, history)).then(() => {
+            // return of async actions
+            expect(store.getActions()).toEqual(expectedActions);
+        });
     });
+
+    it('creates REGISTER when signup action is successful', async (done) => {
+        const { signUpData, regResponse } = mockData;
+
+        const payload = regResponse;
+        moxios.wait(() => {
+            const request = moxios.requests.mostRecent();
+            request.respondWith({
+              status: 201,
+              response: payload,
+            });
+            done();
+        });
+        const expectedActions = [
+            { 
+                type: REGISTER, 
+                payload: payload,
+            }
+        ]
+
+        const store = mockStore({});
+        return store.dispatch(signUpAction(signUpData, ()=>{})).then(() => {
+            // return of async actions
+            expect(store.getActions()).toEqual(expectedActions);
+        });
+    });
+
+    /*
+    it('creates UNAUTHENTICATED  when signout action is successful', async (done) => {
+        const { logoutResponse } = mockData;
+
+        const payload = logoutResponse;
+        moxios.wait(() => {
+            const request = moxios.requests.mostRecent();
+            request.respondWith({
+              status: 200,
+              response: payload,
+            });
+            done();
+        });
+        const expectedActions = [
+            { 
+                type: UNAUTHENTICATED, 
+                payload: payload,
+            }
+        ]
+
+        const store = mockStore({});
+        console.log(localStorage.getItem('current_user'));
+        return store.dispatch(signOutAction()).then(() => {
+            // return of async actions
+            expect(store.getActions()).toEqual(expectedActions);
+        });
+    });*/
+    
 });
